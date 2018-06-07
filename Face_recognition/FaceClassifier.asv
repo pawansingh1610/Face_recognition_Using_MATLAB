@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 %% TesT Face
-[fname path]=uigetfile('.jpg','open face for training');
+[fname,path]=uigetfile('.jpg','open face for training');
 fname = strcat(path,fname);
 im=imread(fname);
 imshow(im);
@@ -14,13 +14,20 @@ load db.mat
 Ftrain=db(:,1:2);
 Ctrain=db(:,3);
 for i=1:size(Ftrain,1)
-dist(1,:)=sum(abs(Ftrain(1,:)-Ftest));
+dist(i,:)=sum(abs(str2doubleFtrain(i,:))-Ftest);
 end
 Min=min(dist);
-if (Min<3)
 m=find(dist==Min,1);
 det_class = Ctrain(m);
-msgbox(strcat('detected class=',num2str(det_class)));
-else
-    msgbox('This person is not registered');
-    
+switch (det_class)
+          case {"1"}
+           msgbox(strcat('detected Person=','Pawan'));
+          case {"2"}
+            msgbox(strcat('detected Person=','Mrinal'));
+          case {"3"}
+           msgbox(strcat('detected Person=','Hj'));
+          case {"4"}
+           msgbox(strcat('detected Person=','Ishant'));
+    otherwise
+            disp('Unknown Person')
+end

@@ -2,7 +2,7 @@ clc;
 clear all;
 close all;
 %% TesT Face
-[fname path]=uigetfile('.jpg','open face for training');
+[fname,path]=uigetfile('.jpg','open face for training');
 fname = strcat(path,fname);
 im=imread(fname);
 imshow(im);
@@ -14,10 +14,9 @@ load db.mat
 Ftrain=db(:,1:2);
 Ctrain=db(:,3);
 for i=1:size(Ftrain,1)
-dist(i,:)=sum(abs(str2double(Ftrain(i,:)))-Ftest);
+dist(i,:)=sum(abs(str2double(Ftrain(i,:))-Ftest));
 end
 Min=min(dist);
-if (Min<3)
 m=find(dist==Min,1);
 det_class = Ctrain(m);
 switch (det_class)
@@ -33,4 +32,3 @@ switch (det_class)
             disp('Unknown Person')
 end
 
- end

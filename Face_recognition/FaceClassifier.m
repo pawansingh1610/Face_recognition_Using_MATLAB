@@ -2,13 +2,13 @@ clc;
 clear all;
 close all;
 %% TesT Face
-[fname,path]=uigetfile('.jpg','open face for training');
-fname = strcat(path,fname);
-im=imread(fname);
-imshow(im);
+snap = test_image();
+imshow(snap);
+im=snap;
+my_Face=face_detector(im);
 title('Test face');
 %% Find out which class it belongs
-Ftest = FeatureStatical(im);
+Ftest = FeatureStatical(my_Face);
 %% Compare with database
 load db.mat
 Ftrain=db(:,1:2);
@@ -21,13 +21,19 @@ m=find(dist==Min,1);
 det_class = Ctrain(m);
 switch (det_class)
           case {"1"}
-           msgbox(strcat('detected Person=','Pawan'));
+           msgbox(strcat('detected Person=','Mrinal'));
           case {"2"}
-            msgbox(strcat('detected Person=','Mrinal'));
+            msgbox(strcat('detected Person=','Pawan'));
           case {"3"}
            msgbox(strcat('detected Person=','Hj'));
           case {"4"}
            msgbox(strcat('detected Person=','Ishant'));
+           case {"5"}
+           msgbox(strcat('detected Person=','Akku'));
+           case {"6"}
+           msgbox(strcat('detected Person=','Aggarwal'));
+           case {"4"}
+           msgbox(strcat('detected Person=','Nilesh'));
     otherwise
             disp('Unknown Person')
 end

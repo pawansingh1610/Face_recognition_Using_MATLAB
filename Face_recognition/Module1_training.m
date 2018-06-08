@@ -2,15 +2,15 @@ clear all;
 close all;
 clc; 
 %% Taking an image
-[fname path]=uiget('open face for training','.jpg');
+[fname path]=uigetfile('.jpg','open face for training');
 fname = strcat(path,fname);
 im=imread(fname);
-imshow(im);
+my_Face=face_detector(im);
 title('Input face');
 c=input('Enter the class');
 
 %% Feature Extraction
-F=FeatureStatical(im);
+F=FeatureStatical(my_Face);
 try
     load db;
     F=[F c];
